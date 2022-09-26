@@ -8,8 +8,7 @@ The REST endpoint is:
 
 https://<hostname>:8089/services/loadbalancer
 
-The endpoint handler is configured to report either `IN` if the SH should be
-used or `OUT` if the load balancer should NOT use it.
+The endpoint handler is configured to report whatever status the SH is in.
 
 The endpoint does not need authentication.
 
@@ -39,4 +38,5 @@ folder of each app.
 **Version**
 
 `13. February 2019 : 0.0.1 / Initial`  
-`14. February 2019 : 0.0.2 / Clean up`  
+`14. February 2019 : 0.0.2 / Clean up`
+`26. September 2022 : 0.0.3 / New updated savedsearch`  
