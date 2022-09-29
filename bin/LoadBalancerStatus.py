@@ -62,16 +62,24 @@ with open(myLookup) as csvfile:
             logger.info('rest_response %s ...' % rest_response)  # logger
 
 class status(splunk.rest.BaseRestHandler):
-     logger.info('Starting the status class ...')  # logger
-     def handle_submit(self):
-         logger.info('Starting the handle_submit def ...')  # logger
-         try:
-             logger.info('setting REST response to %s ...' % rest_response)  # logger
-             self.response.setHeader('content-type', 'text/html')
-             self.response.write('%s' % rest_response)
-         except:
-             logger.info('except ...')  # logger
-             self.response.setHeader('content-type', 'text/html')
-             self.response.write('Uh oh! This server is not in the lookup yet')
+    logger.info('Starting the status class ...')  # logger
+    def handle_submit(self):
+        logger.info('Starting the handle_submit def ...')  # logger
 
-     handle_GET = handle_submit
+        if rest_response == 'Up':
+            status_code = 200
+        else:
+            status_code = 503
+
+        try:
+            logger.info('setting REST response to %s ...' % rest_response)  # logger
+            self.response.setStatus(status_code)
+            self.response.setHeader('content-type', 'text/html')
+            self.response.write('<p>Instance: <b>%s</b> is in status <b>%s</b></p>' % (myHost, rest_response))
+        except:
+            logger.info('except ...')  # logger
+            self.response.setStatus(status_code)
+            self.response.setHeader('content-type', 'text/html')
+            self.response.write('<p>Uh oh! This server is not in the lookup yet</p>')
+
+    handle_GET = handle_submit
