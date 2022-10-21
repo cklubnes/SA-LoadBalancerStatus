@@ -28,7 +28,7 @@ changing  `myDebug = no` to `myDebug = yes`.
 
 **Support**
 
-This is an open source project, no support provided, but you can ask questions
+This is a fork of an open source project, no support provided, but you can ask questions
 on answers.splunk.com and I will most likely answer it.
 Github repository: https://github.com/M-u-S/SA-LoadBalancerStatus
 
