@@ -3,6 +3,7 @@
 # http://answers.splunk.com/users/2122/mus
 #
 
+import json
 import sys
 import os
 import csv
@@ -71,11 +72,20 @@ class status(splunk.rest.BaseRestHandler):
         else:
             status_code = 503
 
+        instance = myHost
+        state = rest_response
+
+        values = {
+            "instance": instance,
+            "state": rest_response,
+            "status_code": status_code
+        }
+
         try:
             logger.info('setting REST response to %s ...' % rest_response)  # logger
             self.response.setStatus(status_code)
-            self.response.setHeader('content-type', 'text/html')
-            self.response.write('<p>Instance: <b>%s</b> is in status <b>%s</b></p>' % (myHost, rest_response))
+            self.response.setHeader('content-type', 'application/json')
+            self.response.write(json.dumps(values))
         except:
             logger.info('except ...')  # logger
             self.response.setStatus(status_code)
