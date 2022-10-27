@@ -76,16 +76,20 @@ class status(splunk.rest.BaseRestHandler):
         state = rest_response
 
         values = {
-            "instance": instance,
-            "state": rest_response,
-            "status_code": status_code
+            "status_code": status_code,
+            "instance": [
+                {
+                    "splunk_server": instance,
+                    "state": rest_response
+                }
+            ]
         }
 
         try:
             logger.info('setting REST response to %s ...' % rest_response)  # logger
             self.response.setStatus(status_code)
             self.response.setHeader('content-type', 'application/json')
-            self.response.write(json.dumps(values))
+            self.response.write(json.dumps(values,indent=2))
         except:
             logger.info('except ...')  # logger
             self.response.setStatus(status_code)
