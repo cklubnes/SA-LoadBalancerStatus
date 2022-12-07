@@ -21,7 +21,7 @@ SPLUNK_HOME = os.environ['SPLUNK_HOME']
 # get myScript name and path
 myScript = os.path.basename(__file__)
 myPath = os.path.dirname(os.path.realpath(__file__))
-myHost = socket.gethostname()
+myHost = socket.gethostname().split(".")[0].lower()
 
 # define the logger to write into log file
 def setup_logging(n):
