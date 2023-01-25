@@ -11,6 +11,7 @@ import socket
 import splunk
 import logging
 import logging.handlers
+from io import open
 
 # set debug
 myDebug='no'
